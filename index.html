@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Régua Prado</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F2F0EC;
+  --panel:#FFFFFF;
+  --panel-2:#F7F6F3;
+  --ink:#16211D;
+  --ink-2:#5A6B64;
+  --ink-3:#8B9A93;
+  --line:#DFDCD5;
+  --brand:#1F6F4A;
+  --brand-soft:#E4F0E9;
+  --good:#1F8A4C;
+  --warn:#B5761F;
+  --bad:#A63A32;
+  --shadow:0 1px 2px rgba(22,33,29,.05),0 12px 32px rgba(22,33,29,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#101714;
+    --panel:#18211D;
+    --panel-2:#1E2823;
+    --ink:#EDF1EE;
+    --ink-2:#9DAEA6;
+    --ink-3:#6E7F78;
+    --line:#2A3630;
+    --brand:#4EBE85;
+    --brand-soft:#1B2E25;
+    --good:#4EBE85;
+    --warn:#D9A155;
+    --bad:#E0736A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101714;
+  --panel:#18211D;
+  --panel-2:#1E2823;
+  --ink:#EDF1EE;
+  --ink-2:#9DAEA6;
+  --ink-3:#6E7F78;
+  --line:#2A3630;
+  --brand:#4EBE85;
+  --brand-soft:#1B2E25;
+  --good:#4EBE85;
+  --warn:#D9A155;
+  --bad:#E0736A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Familjen Grotesk","Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 24px 64px;}
+
+header.top{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:600;
+}
+h1{margin:0;font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+.sub{margin:0;color:var(--ink-2);font-size:15px;max-width:64ch;line-height:1.5}
+
+.grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* ---------- telefone: identidade fixa, cores explícitas ---------- */
+.phone{
+  background:#0B2B22;
+  border-radius:26px;
+  padding:10px;
+  box-shadow:var(--shadow);
+  position:sticky;top:24px;
+}
+@media(max-width:900px){.phone{position:static}}
+.screen{
+  background:#E9E2D8;
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  height:600px;
+}
+.bar{
+  background:#1F6F4A;color:#fff;
+  padding:12px 14px;display:flex;align-items:center;gap:11px;flex:0 0 auto;
+}
+.ava{
+  width:36px;height:36px;border-radius:50%;
+  background:#E9E2D8;color:#1F6F4A;
+  display:grid;place-items:center;font-weight:700;font-size:14px;flex:0 0 auto;
+}
+.bar .who{font-size:14.5px;font-weight:600;line-height:1.2}
+.bar .st{font-size:11.5px;opacity:.8;line-height:1.3}
+
+.thread{
+  flex:1 1 auto;overflow-y:auto;padding:16px 14px 10px;
+  display:flex;flex-direction:column;gap:8px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(31,111,74,.05) 0 2px, transparent 2px),
+    radial-gradient(circle at 70% 70%, rgba(31,111,74,.05) 0 2px, transparent 2px),
+    #E9E2D8;
+  background-size:64px 64px, 64px 64px, auto;
+}
+.msg{
+  max-width:82%;padding:8px 11px;border-radius:12px;
+  font-size:14.5px;line-height:1.42;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  animation:pop .22s ease-out;
+  white-space:pre-wrap;
+}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.msg{animation:none}}
+.them{background:#FFFFFF;color:#111B17;align-self:flex-start;border-top-left-radius:3px}
+.me{background:#D3EFC0;color:#111B17;align-self:flex-end;border-top-right-radius:3px}
+.typing{background:#fff;align-self:flex-start;border-top-left-radius:3px;padding:11px 13px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#9AA8A2;display:block;animation:bl 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+.opts{flex:0 0 auto;padding:10px 12px 14px;background:#E9E2D8;display:flex;flex-direction:column;gap:7px;border-top:1px solid rgba(0,0,0,.06)}
+.opt{
+  appearance:none;border:1px solid #1F6F4A;background:#fff;color:#0F2A20;
+  padding:10px 13px;border-radius:20px;font:inherit;font-size:14px;text-align:left;
+  cursor:pointer;transition:background .13s,transform .13s;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+.opt:hover{background:#DCEFE4}
+.opt:active{transform:scale(.985)}
+.opt:focus-visible{outline:2px solid #0B2B22;outline-offset:2px}
+
+/* ---------- painel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.panel + .panel{margin-top:20px}
+.ph{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:16px}
+.ph h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.06em}
+
+.scoreline{display:flex;align-items:flex-end;gap:14px;margin-bottom:6px}
+.big{font-family:"IBM Plex Mono",monospace;font-size:52px;font-weight:600;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.of{color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:15px;padding-bottom:7px}
+.verdict{margin-left:auto;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.01em}
+.v-none{background:var(--panel-2);color:var(--ink-3)}
+.v-good{background:var(--brand-soft);color:var(--good)}
+.v-warn{background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn)}
+.v-bad{background:color-mix(in srgb,var(--bad) 13%,transparent);color:var(--bad)}
+
+.track{height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden;position:relative;margin:14px 0 8px}
+.fill{height:100%;background:var(--brand);border-radius:99px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.cuts{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:0 0 9px;border-bottom:1px solid var(--line)}
+th:last-child,td:last-child{text-align:right}
+td{padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.dim{color:var(--ink);font-weight:500;display:block}
+.pick{color:var(--ink-3);font-size:12.5px;display:block;margin-top:2px;line-height:1.35}
+.pts{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.pts small{color:var(--ink-3);font-weight:400}
+.pending .dim,.pending .pts{opacity:.4}
+
+.note{font-size:13px;color:var(--ink-2);line-height:1.55;margin:14px 0 0}
+.note strong{color:var(--ink);font-weight:600}
+.kill{margin-top:14px;padding:12px 14px;border-radius:10px;background:color-mix(in srgb,var(--bad) 10%,transparent);color:var(--bad);font-size:13.5px;line-height:1.5}
+
+.reset{
+  appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
+  font:inherit;font-size:13px;font-weight:500;padding:8px 15px;border-radius:8px;cursor:pointer;
+}
+.reset:hover{border-color:var(--brand);color:var(--brand)}
+.reset:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+.legend{display:grid;gap:10px;margin-top:2px}
+.lg{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:0 0 auto}
+.lg b{font-weight:600}
+.lg span{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">weareprado · etapa 0</div>
+    <h1>Régua Prado</h1>
+    <p class="sub">Protótipo do quiz de qualificação. Responda como se fosse um dono de farmácia e acompanhe a pontuação sendo calculada ao lado — é assim que a régua vai decidir quem chega no comercial.</p>
+  </header>
+
+  <div class="grid">
+    <div class="phone">
+      <div class="screen">
+        <div class="bar">
+          <div class="ava">P</div>
+          <div>
+            <div class="who">Prado Farma</div>
+            <div class="st" id="st">online</div>
+          </div>
+        </div>
+        <div class="thread" id="thread"></div>
+        <div class="opts" id="opts"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="ph">
+          <h2>Pontuação ao vivo</h2>
+          <button class="reset" id="reset">Recomeçar</button>
+        </div>
+        <div class="scoreline">
+          <span class="big" id="score">0</span>
+          <span class="of">/ 100</span>
+          <span class="verdict v-none" id="verdict">aguardando</span>
+        </div>
+        <div class="track"><div class="fill" id="fill" style="width:0%"></div></div>
+        <div class="cuts"><span>0</span><span>40 · morno</span><span>70 · qualificado</span><span>100</span></div>
+        <div id="kill"></div>
+      </div>
+
+      <div class="panel">
+        <div class="ph"><h2>De onde vem cada ponto</h2><span class="tag">régua v1</span></div>
+        <table>
+          <thead><tr><th>Dimensão</th><th>Pontos</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p class="note"><strong>Por que o dinheiro fica por último.</strong> A pergunta de orçamento é a que mais faz o lead abandonar. Colocando-a no fim, quem chega até ela já investiu cinco respostas — e responde em vez de fechar a aba.</p>
+      </div>
+
+      <div class="panel">
+        <div class="ph"><h2>Para onde o lead vai</h2></div>
+        <div class="legend">
+          <div class="lg"><span class="dot" style="background:var(--good)"></span><span><b>70 a 100 — qualificado.</b> Agenda ou WhatsApp do vendedor. É aqui que o evento de conversão dispara: esse é o CPLQ que a campanha vai otimizar.</span></div>
+          <div class="lg"><span class="dot" style="background:var(--warn)"></span><span><b>40 a 69 — morno.</b> Conteúdo e nutrição, sem consumir tempo do comercial. Hoje esse grupo come de 60% a 70% da semana do time.</span></div>
+          <div class="lg"><span class="dot" style="background:var(--bad)"></span><span><b>Abaixo de 40 ou eliminado.</b> Página de agradecimento honesta. Nenhum evento disparado — o algoritmo não deve aprender com esse perfil.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const Q = [
+  { id:'papel', dim:'Quem responde', max:20, q:'Oi! Aqui é da Prado Farma 👋\n\nSão 6 perguntas rápidas pra eu entender sua farmácia e ver se a gente consegue te ajudar.\n\nPrimeiro: quem é você na farmácia?',
+    a:[ {t:'Sou o dono e decido sozinho',p:20},
+        {t:'Sou sócio e decido junto com meu sócio',p:14},
+        {t:'Sou o dono, mas dependo de aprovação',p:10},
+        {t:'Sou gerente ou trabalho na farmácia',p:0} ] },
+
+  { id:'porte', dim:'Tamanho da operação', max:15, q:'Beleza. E como é o tamanho da operação hoje?',
+    a:[ {t:'Tenho 2 unidades ou mais',p:15},
+        {t:'1 unidade, com 4 funcionários ou mais',p:13},
+        {t:'1 unidade, com 3 funcionários',p:9},
+        {t:'1 unidade, com 2 funcionários',p:3},
+        {t:'Sou só eu, ou eu e mais uma pessoa',p:0} ] },
+
+  { id:'problema', dim:'Problema a resolver', max:25, q:'Agora a mais importante: o que você quer resolver?',
+    a:[ {t:'Vender mais, aumentar o faturamento',p:25},
+        {t:'Aumentar o movimento na loja',p:22},
+        {t:'Vender mais no WhatsApp e no delivery',p:20},
+        {t:'Ter presença no Instagram, aparecer mais',p:5},
+        {t:'Automatizar o atendimento, ter um sistema',p:0},
+        {t:'Ainda não sei, quero entender como funciona',p:0} ] },
+
+  { id:'historico', dim:'O que já tentou', max:10, q:'E o que você já fez pra tentar resolver isso?',
+    a:[ {t:'Já contratei agência e não deu o resultado que eu esperava',p:10},
+        {t:'Tenho alguém cuidando hoje, mas quero mudar',p:9},
+        {t:'Já tentei fazer por conta própria',p:7},
+        {t:'Estou pesquisando agora, falando com mais de um',p:6},
+        {t:'Nunca fiz nada',p:2} ] },
+
+  { id:'investe', dim:'Investimento atual', max:30, q:'Falta pouco. Hoje, quanto você investe por mês em marketing?',
+    a:[ {t:'Mais de R$ 2.000 por mês',p:30},
+        {t:'Entre R$ 1.000 e R$ 2.000',p:28},
+        {t:'Entre R$ 500 e R$ 1.000',p:20},
+        {t:'Até R$ 500',p:5},
+        {t:'Hoje não invisto nada',p:0} ] },
+
+  { id:'capacidade', dim:'Capacidade de investir', max:0, kill:true,
+    q:'Última. Pra começar, o investimento fica entre R$ 1.500 e R$ 2.000 por mês, mais uma verba de anúncio a partir de R$ 500.\n\nIsso cabe no seu orçamento hoje?',
+    a:[ {t:'Cabe sem apertar',p:0},
+        {t:'Cabe, mas é o meu limite',p:-5},
+        {t:'Hoje não cabe',p:0,kill:true} ] },
+];
+
+const thread=document.getElementById('thread'), opts=document.getElementById('opts'),
+      rowsEl=document.getElementById('rows'), scoreEl=document.getElementById('score'),
+      fillEl=document.getElementById('fill'), verdictEl=document.getElementById('verdict'),
+      killEl=document.getElementById('kill'), stEl=document.getElementById('st');
+
+let step=0, picks={}, dead=false, finished=false;
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function bubble(cls,text){
+  const d=document.createElement('div');
+  d.className='msg '+cls; d.textContent=text;
+  thread.appendChild(d); thread.scrollTop=thread.scrollHeight;
+  return d;
+}
+function typing(){
+  const d=document.createElement('div');
+  d.className='typing'; d.innerHTML='<i></i><i></i><i></i>';
+  thread.appendChild(d); thread.scrollTop=thread.scrollHeight;
+  return d;
+}
+
+function renderRows(){
+  let html = Q.filter(q=>!q.kill).map(q=>{
+    const pk=picks[q.id];
+    return `<tr class="${pk?'':'pending'}">
+      <td><span class="dim">${q.dim}</span>${pk?`<span class="pick">${pk.t}</span>`:'<span class="pick">—</span>'}</td>
+      <td class="pts">${pk?pk.p:0} <small>/ ${q.max}</small></td>
+    </tr>`;
+  }).join('');
+  if(picks['_ajuste']){
+    html += `<tr><td><span class="dim">Ajuste</span><span class="pick">${picks['_ajuste'].t}</span></td>
+      <td class="pts">${picks['_ajuste'].p}</td></tr>`;
+  }
+  rowsEl.innerHTML = html;
+}
+
+function total(){ return Object.values(picks).reduce((s,p)=>s+p.p,0); }
+
+function paint(){
+  const t=Math.max(0,total());
+  scoreEl.textContent=t;
+  fillEl.style.width=Math.min(100,t)+'%';
+  const done = finished;
+  let cls='v-none', label='em andamento';
+  if(dead){ cls='v-bad'; label='eliminado'; }
+  else if(!Object.keys(picks).length){ label='aguardando'; }
+  else if(done){
+    if(t>=70){cls='v-good';label='qualificado';}
+    else if(t>=40){cls='v-warn';label='morno';}
+    else {cls='v-bad';label='não qualificado';}
+  }
+  verdictEl.className='verdict '+cls;
+  verdictEl.textContent=label;
+  fillEl.style.background = dead ? 'var(--bad)' : (done && t>=70 ? 'var(--brand)' : (done && t>=40 ? 'var(--warn)' : 'var(--brand)'));
+  renderRows();
+}
+
+function ask(){
+  if(step>=Q.length){ return finish(); }
+  const q=Q[step];
+  opts.innerHTML='';
+  stEl.textContent='digitando…';
+  const t=typing();
+  setTimeout(()=>{
+    t.remove(); stEl.textContent='online';
+    bubble('them',q.q);
+    q.a.forEach(a=>{
+      const b=document.createElement('button');
+      b.className='opt'; b.type='button'; b.textContent=a.t;
+      b.onclick=()=>choose(q,a);
+      opts.appendChild(b);
+    });
+  }, RM?0:620);
+}
+
+function choose(q,a){
+  opts.innerHTML='';
+  bubble('me',a.t);
+  if(!q.kill) picks[q.id]=a;
+  if(a.kill){ dead=true; paint(); return setTimeout(finish, RM?0:500); }
+  if(q.kill && a.p) picks['_ajuste']={t:'Orçamento no limite',p:a.p,dim:'Ajuste'};
+  step++; paint();
+  setTimeout(ask, RM?0:420);
+}
+
+function finish(){
+  finished=true;
+  const t=Math.max(0,total());
+  opts.innerHTML='';
+  stEl.textContent='digitando…';
+  const ty=typing();
+  setTimeout(()=>{
+    ty.remove(); stEl.textContent='online';
+    if(dead){
+      bubble('them','Obrigado por responder com honestidade! 🙏\n\nHoje o nosso trabalho não caberia no seu momento — e eu prefiro te falar isso agora do que te tomar uma hora numa reunião.\n\nVou te mandar um material gratuito sobre como aumentar as vendas da farmácia sem investir em anúncio. Quando fizer sentido, a gente conversa.');
+      killEl.innerHTML='<div class="kill"><strong>Eliminado no critério de capacidade.</strong> Independe da pontuação — o lead não segue e nenhum evento de conversão é disparado.</div>';
+    } else if(t>=70){
+      bubble('them','Show! Pelo que você respondeu, a gente consegue te ajudar. 🎯\n\nVou te passar para o Henrique, que cuida disso e vai te mostrar exatamente como funcionaria na sua farmácia.\n\nEscolhe o melhor horário aqui: [agenda]');
+      killEl.innerHTML='';
+    } else if(t>=40){
+      bubble('them','Obrigado! Pelo que você me contou, ainda não é a hora do nosso trabalho — mas tem bastante coisa que dá pra fazer sozinho antes disso.\n\nVou te mandar nosso material sobre as primeiras vendas pelo WhatsApp. Se quiser conversar depois, é só chamar.');
+      killEl.innerHTML='';
+    } else {
+      bubble('them','Obrigado por responder! 🙏\n\nHoje o nosso trabalho não é o que você precisa — seria desperdício do seu dinheiro e do nosso tempo.\n\nVou te mandar um material gratuito que ajuda no seu momento atual.');
+      killEl.innerHTML='';
+    }
+    const again=document.createElement('button');
+    again.className='opt'; again.type='button'; again.textContent='↺ Responder de novo';
+    again.onclick=start; opts.appendChild(again);
+  }, RM?0:700);
+  paint();
+}
+
+function start(){
+  step=0; picks={}; dead=false; finished=false;
+  thread.innerHTML=''; opts.innerHTML=''; killEl.innerHTML='';
+  paint(); ask();
+}
+document.getElementById('reset').onclick=start;
+start();
+</script>
+
+</body>
+</html>
